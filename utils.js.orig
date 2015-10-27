@@ -5,6 +5,9 @@ function getExt(extName) {
   return exts.indexOf(extName) !== -1;
 }
 
+<<<<<<< HEAD
+module.exports.getExt = getExt;
+=======
 function attemptCommand = function(phrase, commands, callback){
   /* iterate throught commands, see if there is a valid match */
   for (var key in commands){
@@ -45,6 +48,8 @@ function inputToArgumentsArray = function(command,input){
   return args;
 }
 
-module.exports.getExt = getExt;
+module.exports.getApp = getApp;
 module.exports.attemptCommand = attemptCommand;
 module.exports.inputToArgumentsArray = inputToArgumentsArray;
+
+>>>>>>> (util) Added command processing utility functions
