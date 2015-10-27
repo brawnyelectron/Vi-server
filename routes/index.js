@@ -15,18 +15,18 @@ router.post('/', function(req, res) {
     var lower = transcript.toLowerCase();
     var matches = lower.match(/(hey|yo) (\w+) (\w+) (.*)/);
 
-    var appName = matches[2];
+    var extName = matches[2];
     var cmd = matches[3];
     var txt = matches[4];
 
-    if (!utils.getApp(appName)) {
-      res.send("Error, " + appName + " was not found!");
+    if (!utils.getExt(extName)) {
+      res.send("Error, " + extName + " was not found!");
     } else {
-      var app = require('../apps/' + appName + '/app.js');
-      if (app[cmd] === undefined) {
-        res.send("Error, command " + cmd + " for plugin " + appName + " is not available.");
+      var ext = require('../lib/' + extName + '/ext.js');
+      if (ext[cmd] === undefined) {
+        res.send("Error, command " + cmd + " for extension " + extName + " is not available.");
       } else {
-        app[cmd](txt, req, res);
+        ext[cmd](txt, req, res);
       }
     }
   }

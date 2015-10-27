@@ -1,0 +1,15 @@
+{
+  "total": 2,
+  "apps": {
+    "twitter": {
+      "id": "f78fc57ae492fc38",
+      "author": "Twitter, Inc.",
+      "version": "1.5.2"
+    },
+    "slack": {
+      "id": "bbf6d17bb327346e",
+      "author": "Slack Technologies",
+      "version": "0.6.7"
+    }
+  }
+}

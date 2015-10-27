@@ -1,8 +1,8 @@
 var fs = require('fs');
 
-function getApp(appName) {
-    var apps = fs.readdirSync('apps');
-    return apps.indexOf(appName) !== -1;
+function getExt(extName) {
+  var exts = fs.readdirSync('lib');
+  return exts.indexOf(extName) !== -1;
 }
 
-module.exports.getApp = getApp;
+module.exports.getExt = getExt;
