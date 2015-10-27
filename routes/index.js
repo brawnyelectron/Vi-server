@@ -8,23 +8,26 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
-  var transcript = urlencode.decode(req.body.transcript);
-  var lower = transcript.toLowerCase();
-  var matches = lower.match(/(hey|yo) (\w+) (\w+) (.*)/);
+  if (!Object.keys(req.body).length) res.send(400);
+  else {
+    var transcript = req.body.transcript;
+    console.log(transcript);
+    var lower = transcript.toLowerCase();
+    var matches = lower.match(/(hey|yo) (\w+) (\w+) (.*)/);
 
-  var appName = matches[2];
-  var cmd = matches[3];
-  var txt = matches[4];
+    var appName = matches[2];
+    var cmd = matches[3];
+    var txt = matches[4];
 
-  if (!utils.getApp(appName)) {
-    res.send("Error, " + appName + " was not found!");
-  } else {
-    //res.send(appName);//var app = require('../apps/' + appName + '/app');
-    var app = require('../apps/' + appName + '/app.js');
-    if (app[cmd] === undefined) {
-      res.send("Error, command " + cmd + " for plugin " + appName + " is not available.");
+    if (!utils.getApp(appName)) {
+      res.send("Error, " + appName + " was not found!");
     } else {
-      app[cmd](txt, req, res);
+      var app = require('../apps/' + appName + '/app.js');
+      if (app[cmd] === undefined) {
+        res.send("Error, command " + cmd + " for plugin " + appName + " is not available.");
+      } else {
+        app[cmd](txt, req, res);
+      }
     }
   }
 });
