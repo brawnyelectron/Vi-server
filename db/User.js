@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var userScheme = mongoose.Schema({
-  user_id: String,
-  extension_auths: Object
+  userId: String,
+  extensionAuths: Object
 });
 
 var User = mongoose.model('User', userScheme);
