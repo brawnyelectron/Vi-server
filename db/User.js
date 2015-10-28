@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var userScheme = mongoose.Schema({
   userId: String,
+  extensions: Array,
   extensionAuths: Object
 });
 
