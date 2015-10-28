@@ -14,7 +14,7 @@ db.once('open', function (callback) {
 });
 
 router.post('/addUser', function(req, res) {
-  var user = new User({ userId: req.body.userId, extensions: req.body.extensions, extensionAuths: {} })
+  var user = new User({ userId: req.body.userId, extensions: req.body.extensions.split(', '), extensionAuths: {} })
   User.findOneAndUpdate({ userId: req.body.userId }, user, { upsert: true }, function(err, user) {
     if (err) { console.log('We got an err:', err) };
     console.log('User Added! ', user);
