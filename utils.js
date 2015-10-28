@@ -1,11 +1,24 @@
 var fs = require('fs');
+var extract = require('extract-zip')
 
 function getExt(extName) {
   var exts = fs.readdirSync('lib');
   return exts.indexOf(extName) !== -1;
 }
 
-function attemptCommand (phrase, commands, callback){
+function addExtension(zip, appName) {
+  fs.mkdir('/lib/' + appName, function(err) {
+    if (err) {
+      console.log('Could not make directory!')
+    } else {
+      extract(zip, {dir: '/lib/' + appName}, function(err) {
+        if (err) { console.log('Couldn\'t unzip file!', err)}
+      });
+    }
+  });
+}
+
+function attemptCommand(phrase, commands, callback) {
   /* iterate throught commands, see if there is a valid match */
   for (var key in commands){
     /* If key no arguments */
@@ -48,3 +61,4 @@ function inputToArgumentsArray (command, input){
 module.exports.getExt = getExt;
 module.exports.attemptCommand = attemptCommand;
 module.exports.inputToArgumentsArray = inputToArgumentsArray;
+module.exports.addExtension = addExtension;
