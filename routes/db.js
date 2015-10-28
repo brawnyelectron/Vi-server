@@ -13,7 +13,7 @@ db.once('open', function (callback) {
 });
 
 router.post('/addUser', function(req, res) {
-  res.sendStatus('Hello!');
+  res.sendStatus(200);
 });
 
 module.exports = router;
