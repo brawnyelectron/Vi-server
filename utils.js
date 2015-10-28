@@ -5,7 +5,7 @@ function getExt(extName) {
   return exts.indexOf(extName) !== -1;
 }
 
-function attemptCommand = function(phrase, commands, callback){
+function attemptCommand (phrase, commands, callback){
   /* iterate throught commands, see if there is a valid match */
   for (var key in commands){
     /* If key no arguments */
@@ -15,7 +15,7 @@ function attemptCommand = function(phrase, commands, callback){
       }
     } else {
       /* If can gather arguments i.e. valid match */
-      var args = Vi.helpers.inputToArgumentsArray(key, phrase);
+      var args = inputToArgumentsArray(key, phrase);
       if(args){
         /* Add error as first argument always */
         args.unshift(callback);
@@ -28,7 +28,7 @@ function attemptCommand = function(phrase, commands, callback){
   return false; 
 }
 
-function inputToArgumentsArray = function(command,input){
+function inputToArgumentsArray (command, input){
   /* Replaces $[0-9] spots with (.*) to be used as wildcards when string is converted to RegExp */
   var reg = new RegExp(command.replace(/\$[0-9]/g, "(.*)"));
 
