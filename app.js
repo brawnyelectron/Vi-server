@@ -11,6 +11,7 @@ var oauth = require('./routes/oauth');
 var developer = require('./routes/developer');
 var user = require('./routes/user');
 var application = require('./routes/application');
+var authenticate = require('./routes/authenticate');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use('/oauth', oauth);
 app.use('/user', user);
 app.use('/developer', developer);
 app.use('/application', application);
+app.use('/authenticate', authenticate);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

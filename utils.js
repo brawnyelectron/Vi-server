@@ -53,4 +53,12 @@ function extractArgs(key, numArgs, phrase) {
   return args;
 }
 
+function runAuthenticationSequence(appName, req, res, next, responseCB) {
+  /* Run authentication given app name */
+  var auth = require('./lib/' + appName + '/auth.js');
+  auth.authenticate(req, res, next, responseCB);
+}
+
 module.exports.runCommand = runCommand;
+module.exports.extractArgs = extractArgs;
+module.exports.runAuthenticationSequence = runAuthenticationSequence;
