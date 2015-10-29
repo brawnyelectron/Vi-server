@@ -17,6 +17,6 @@
     "morgan": "~1.6.1",
     "recursive-readdir": "^1.2.1",
     "request": "^2.65.0",
-    "serve-favicon": "~2.3.0",
+    "serve-favicon": "~2.3.0"
   }
 }
