@@ -3,8 +3,8 @@ var router = express.Router();
 var User = require('../db/User');
 var Extension = require('../db/Extension');
 
-router.get('/', function(req, res) {
-  User.findOne({ userId: req.body.userId }, function(err, user) {
+router.get('/:userId', function(req, res) {
+  User.findOne({ userId: req.params.userId }, function(err, user) {
     if (err) {
       console.log('Error in finding a User! ' + err);
     } else {
