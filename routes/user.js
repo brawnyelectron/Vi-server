@@ -29,4 +29,13 @@ router.post('/', function(req, res) {
   res.sendStatus(200);
 });
 
+router.post('/addExtension', function(req, res) {
+  User.findOneAndUpdate({ userId: req.body.userId }, { $addToSet: { "extensions" : req.body.extension }}, function(err) {
+    if (err) {
+      console.log('We got an error on adding an extension to a users extensions array. Err: ', err);
+    }
+    res.sendStatus(200);
+  });
+});
+
 module.exports = router;
