@@ -11,7 +11,6 @@ router.post('/', function(req, res) {
   if (!Object.keys(req.body).length) res.send(400);
   else {
     var transcript = req.body.transcript;
-    console.log(transcript);
     var lower = transcript.toLowerCase();
     var matches = lower.match(/(hey|yo) (\w+) (\w+) (.*)/);
 
@@ -19,7 +18,7 @@ router.post('/', function(req, res) {
     var cmd = matches[3];
     var txt = matches[4];
 
-    var responseJSON = {}
+    var responseJSON = {};
 
     if (!utils.getExt(extName)) {
       console.log("Error, " + extName + " not found");
