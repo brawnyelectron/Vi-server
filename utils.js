@@ -1,26 +1,33 @@
 var fs = require('fs');
-var extract = require('extract-zip')
+var extract = require('extract-zip');
 
 function getExt(extName) {
   var exts = fs.readdirSync('lib');
   return exts.indexOf(extName) !== -1;
 }
 
-function addExtension(zip, appName) {
-  fs.mkdir('/lib/' + appName, function(err) {
-    if (err) {
-      console.log('Could not make directory!')
-    } else {
-      extract(zip, {dir: '/lib/' + appName}, function(err) {
-        if (err) { console.log('Couldn\'t unzip file!', err)}
-      });
+function addExtension(bufferedZip, appName, resCB) {
+  /* Makes temp zip file */
+  fs.writeFile('tmp/' + appName + '.zip', bufferedZip, function(err) {
+    if (err) { 
+      console.log('Error in writing buffer to zip file, ', err);
     }
+    /* Unpack zip file to individual files */
+    extract('tmp/' + appName + '.zip', { dir: 'lib/' }, function(err) {
+      if (err) { 
+        console.log('Couldn\'t unzip file!', err);
+      }
+        
+      /* Remove temp file */
+      fs.unlinkSync('tmp/' + appName + '.zip');
+      resCB();
+    });
   });
 }
 
 function attemptCommand(phrase, commands, callback) {
   /* iterate throught commands, see if there is a valid match */
-  for (var key in commands){
+  for (var key in commands) {
     /* If key no arguments */
     if (!key.match(/\$/g)) {
       if (key === phrase) {
@@ -29,7 +36,7 @@ function attemptCommand(phrase, commands, callback) {
     } else {
       /* If can gather arguments i.e. valid match */
       var args = inputToArgumentsArray(key, phrase);
-      if(args){
+      if (args) {
         /* Add error as first argument always */
         args.unshift(callback);
         args.unshift('error');
@@ -41,7 +48,7 @@ function attemptCommand(phrase, commands, callback) {
   return false; 
 }
 
-function inputToArgumentsArray (command, input){
+function inputToArgumentsArray(command, input) {
   /* Replaces $[0-9] spots with (.*) to be used as wildcards when string is converted to RegExp */
   var reg = new RegExp(command.replace(/\$[0-9]/g, "(.*)"));
 
