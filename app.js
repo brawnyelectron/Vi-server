@@ -10,7 +10,7 @@ var index = require('./routes/index');
 var oauth = require('./routes/oauth');
 var developer = require('./routes/developer');
 var user = require('./routes/user');
-var application = require('./routes/application');
+var extension = require('./routes/extension');
 var authenticate = require('./routes/authenticate');
 
 var app = express();
@@ -32,7 +32,7 @@ app.use('/', index);
 app.use('/oauth', oauth);
 app.use('/user', user);
 app.use('/developer', developer);
-app.use('/application', application);
+app.use('/extension', extension);
 app.use('/authenticate', authenticate);
 
 // catch 404 and forward to error handler

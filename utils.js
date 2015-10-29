@@ -1,4 +1,29 @@
 var fs = require('fs');
+var extract = require('extract-zip');
+
+function getExt(extName) {
+  var exts = fs.readdirSync('lib');
+  return exts.indexOf(extName) !== -1;
+}
+
+function addExtension(bufferedZip, appName, resCB) {
+  /* Makes temp zip file */
+  fs.writeFile('tmp/' + appName + '.zip', bufferedZip, function(err) {
+    if (err) { 
+      console.log('Error in writing buffer to zip file, ', err);
+    }
+    /* Unpack zip file to individual files */
+    extract('tmp/' + appName + '.zip', { dir: 'lib/' }, function(err) {
+      if (err) { 
+        console.log('Couldn\'t unzip file!', err);
+      }
+        
+      /* Remove temp file */
+      fs.unlinkSync('tmp/' + appName + '.zip');
+      resCB();
+    });
+  });
+}
 
 function runCommand(transcript, cb) {
   var match = transcript.match(/(?:\w+)\s(\w+)\s(\w+)(?:\s(.*))?/i);
@@ -60,5 +85,7 @@ function runAuthenticationSequence(appName, req, res, next, responseCB) {
 }
 
 module.exports.runCommand = runCommand;
+module.exports.getExt = getExt;
+module.exports.addExtension = addExtension;
 module.exports.extractArgs = extractArgs;
 module.exports.runAuthenticationSequence = runAuthenticationSequence;
