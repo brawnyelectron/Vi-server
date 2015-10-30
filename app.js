@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport'), SlackStrategy = require('passport-slack').Strategy;
 
 var db = require('./db/db');
 
@@ -27,6 +28,18 @@ app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+
+passport.use(new SlackStrategy({
+  clientID: "12621704533.13244851507",
+  clientSecret: "70ea3838f1b9d628a57ac5675e1f64bc"
+},
+function(accessToken, refreshToken, profile, done) {
+  console.log('Access token: ', accessToken);
+  console.log('Refresh token: ', refreshToken);
+  console.log('Profile: ', profile);
+  return done(null, profile);
+}));
 
 app.use('/', index);
 app.use('/oauth', oauth);

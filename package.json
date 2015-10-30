@@ -15,6 +15,8 @@
     "lodash": "^3.10.1",
     "mongoose": "^4.2.3",
     "morgan": "~1.6.1",
+    "passport": "^0.3.0",
+    "passport-slack": "0.0.4",
     "recursive-readdir": "^1.2.1",
     "request": "^2.65.0",
     "serve-favicon": "~2.3.0"
