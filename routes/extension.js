@@ -29,7 +29,7 @@ router.post('/', function(req, res) {
       utils.addExtension(req.body, "demo", function() {
         res.sendStatus(200);
       });
-      var extensions = new Extension({ developerId: "fakeId", name: "demo"  })
+      var extensions = new Extension({ developerId: "fakeId", name: "demo", description: "fake description", commands: [], iconURL: "fake icon URL"  })
       extensions.save(function(err) {
         if (err) { 
           console.log('Didn\'t save Extension to Extension collection')
