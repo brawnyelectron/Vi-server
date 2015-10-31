@@ -38,6 +38,7 @@ function runCommand(transcript, cb) {
   try {
     ext = require(filename);
   } catch(e) {
+    console.log(e);
     cb(true, 'Sorry, I couldn\'t find this extension');
     return;
   }
@@ -78,10 +79,10 @@ function extractArgs(key, numArgs, phrase) {
   return args;
 }
 
-function runAuthenticationSequence(appName, req, res, next, responseCB) {
-  /* Run authentication given app name */
-  var auth = require('./lib/' + appName + '/auth.js');
-  auth.authenticate(req, res, next, responseCB);
+function runAuthenticationSequence(extension, cb) {
+  /* Run authentication given app name and then redirect with callback */
+  var auth = require('./lib/' + extension + '/auth.js');
+  cb();
 }
 
 module.exports.runCommand = runCommand;
