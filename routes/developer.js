@@ -8,7 +8,7 @@ var Developer = require('../db/Developer');
 
 router.post('/', function(req, res) {
   var developer = new Developer({ email: req.body.email, password: bcrypt.hashSync(req.body.password, 8) });
-  Developer.update({ email: req.body.email}, developer, { upsert: true }, function(err, dev) {
+  Developer.update({ email: req.body.email }, developer, { upsert: true }, function(err, dev) {
     if (err) { 
       console.log('Couldn\'t add dev! Error: ', err);
     }
