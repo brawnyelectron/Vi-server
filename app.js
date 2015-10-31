@@ -41,7 +41,6 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/oauth', oauth);
-app.use('/user', user);
 app.use('/developer', developer);
 app.use('/extension', extension);
 app.use('/authenticate', authenticate);
