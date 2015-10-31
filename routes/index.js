@@ -12,11 +12,12 @@ router.post('/command', function(req, res) {
     res.send(400);
   } else {
     var transcript = req.body.transcript;
+    var auth = req.body.auth;
+    console.log('auth =', auth);
 
-    utils.runCommand(transcript, function(err, feedback) {
+    utils.runCommand(transcript, auth, function(err, feedback) {
       if (err) {
         console.log(err);
-        // res.status(401).send({feedback: feedback});
         res.send({feedback: feedback});
       }
       else {
