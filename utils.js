@@ -38,6 +38,7 @@ function runCommand(transcript, cb) {
   try {
     ext = require(filename);
   } catch(e) {
+    console.log(e);
     cb(true, 'Sorry, I couldn\'t find this extension');
     return;
   }
