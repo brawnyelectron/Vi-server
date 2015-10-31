@@ -12,7 +12,6 @@ var config = require('./config.json');
 var index = require('./routes/index');
 var oauth = require('./routes/oauth');
 var developer = require('./routes/developer');
-var user = require('./routes/user');
 var extension = require('./routes/extension');
 var authenticate = require('./routes/authenticate');
 
