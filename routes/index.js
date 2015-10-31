@@ -13,7 +13,6 @@ router.post('/command', function(req, res) {
   } else {
     var transcript = req.body.transcript;
     var auth = req.body.auth;
-    console.log('auth =', auth);
 
     utils.runCommand(transcript, auth, function(err, feedback) {
       if (err) {
