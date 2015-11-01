@@ -12,7 +12,6 @@ var config = require('./config.json');
 var index = require('./routes/index');
 var oauth = require('./routes/oauth');
 var developer = require('./routes/developer');
-var user = require('./routes/user');
 var extension = require('./routes/extension');
 var authenticate = require('./routes/authenticate');
 
@@ -41,7 +40,6 @@ app.use(passport.session());
 
 app.use('/', index);
 app.use('/oauth', oauth);
-app.use('/user', user);
 app.use('/developer', developer);
 app.use('/extension', extension);
 app.use('/authenticate', authenticate);
