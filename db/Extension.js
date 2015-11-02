@@ -8,6 +8,6 @@ var extensionSchema = mongoose.Schema({
   iconURL: String,
 });
 
-var Extension = mongoose.model('Extension', extensionSchema);
+var Extension = mongoose.model('extension', extensionSchema);
 
 module.exports = Extension;

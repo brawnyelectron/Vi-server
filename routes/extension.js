@@ -8,10 +8,12 @@ var Extension = require('../db/Extension');
 var Developer = require('../db/Developer');
 
 router.get('/', function(req, res) {
-  Extension.find({}, function(err, extensions) {
+  var name = req.query.name || '';
+  Extension.find({name: {"$regex": name, "$options": "i"}}, function(err, extensions) {
     if (err) {
       console.log('Error in retrieving all extensions: ', err);
     } else {
+      console.log('extensions =', extensions);
       res.send(extensions);
     }
   });
@@ -20,7 +22,7 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   /* Ideally need extensions name, developer id, and zipped extension in request */
   req.accepts('application/zip');
-  /* Developer ame of the extension is being hardcoded in. This should be related to the post, hard to have multipart req.body */
+  /* Developer name of the extension is being hardcoded in. This should be related to the post, hard to have multipart req.body */
   Developer.findOne({ username: "pawTestUser" }, function(err, dev) {
     if (err) {
       console.log('No dev found! Or error: ', err);
